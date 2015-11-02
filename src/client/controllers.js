@@ -1,14 +1,21 @@
 app.controller('RollController', ['$scope', 'RollServices', function($scope, RollServices){
 
-  $scope.noScore = true;
-  $scope.upperTotal = 0;
-  $scope.lowerTotal = 0;
-  $scope.grandTotal = 0;
   var turnRolls = 0;
   var gameTurns = 0;
   var hand;
   var numToRoll = 5;
   var heldDice = [];
+
+  $scope.noScore = true;
+  $scope.upperTotal = 0;
+  $scope.lowerTotal = 0;
+  $scope.grandTotal = 0;
+
+  function combineArrays(){
+    for (var i = 0; i < heldDice.length; i++) {
+      hand.push(heldDice[i]);
+    }
+  }
 
   $scope.roll = function (){
     if(turnRolls >= 2){
@@ -19,19 +26,25 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
     var dice = RollServices.roll(numToRoll);
     $scope.dice = dice;
     hand = dice;
-    for (var i = 0; i < heldDice.length; i++) {
-      hand.splice(0, 0, heldDice[i]);
-    }
   };
 
-
-  $scope.hold = function(die){
+  $scope.hold = function(die, index){
     heldDice.push(die);
+    hand.splice(index, 1);
     numToRoll--;
+    $scope.heldDice = heldDice;
   };
+
+  $scope.unhold = function(die, index){
+    hand.push(die);
+    heldDice.splice(index, 1);
+    numToRoll++;
+  };
+
 
   //upper total functions
   $scope.scoreOnes = function(){
+    combineArrays();
     if($scope.oneScore === undefined && hand !== undefined){
       $scope.noScore = false;
       var onesScore = RollServices.score(hand, 1);
@@ -42,6 +55,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreTwos = function(){
+    combineArrays();
     if($scope.twoScore === undefined && hand !== undefined){
       var twosScore = RollServices.score(hand, 2);
       $scope.twoScore = twosScore;
@@ -51,6 +65,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreThrees = function(){
+    combineArrays();
     if($scope.threeScore === undefined && hand !== undefined){
       var threesScore = RollServices.score(hand, 3);
       $scope.threeScore = threesScore;
@@ -60,6 +75,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreFours = function(){
+    combineArrays();
     if($scope.fourScore === undefined && hand !== undefined){
       var foursScore = RollServices.score(hand, 4);
       $scope.fourScore = foursScore;
@@ -69,6 +85,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreFives = function(){
+    combineArrays();
     if($scope.fiveScore === undefined && hand !== undefined){
       var fivesScore = RollServices.score(hand, 5);
       $scope.fiveScore = fivesScore;
@@ -78,6 +95,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreSixes = function(){
+    combineArrays();
     if($scope.sixScore === undefined && hand !== undefined){
       var sixesScore = RollServices.score(hand, 6);
       $scope.sixScore = sixesScore;
@@ -89,6 +107,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   //lower total functions
 
   $scope.scoreChance = function(){
+    combineArrays();
     if($scope.chance === undefined && hand !== undefined){
       var chanceTotal = RollServices.chance(hand);
       $scope.chance = chanceTotal;
@@ -98,6 +117,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
    $scope.scoreYahtzee = function(){
+    combineArrays();
     if($scope.yahtzee === undefined && hand !== undefined){
       var yahtzee = RollServices.yahtzee(hand);
       $scope.yahtzee = yahtzee;
@@ -107,6 +127,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreLrg = function(){
+    combineArrays();
     var lrg = RollServices.lrgStraight(hand);
     $scope.largeStraight = lrg;
     $scope.lowerTotal += lrg;
@@ -114,6 +135,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreSml = function(){
+    combineArrays();
     var sml = RollServices.smlStraight(hand);
     $scope.smallStraight = sml;
     $scope.lowerTotal += sml;
@@ -121,6 +143,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreHouse = function(){
+    combineArrays();
     var house = RollServices.fullHouse(hand);
     $scope.fullHouse = house;
     $scope.lowerTotal += house;
@@ -128,6 +151,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreThreeKind = function(){
+    combineArrays();
     var three = RollServices.threeKind(hand);
     $scope.threeKind = three;
     $scope.lowerTotal += three;
@@ -135,6 +159,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
   };
 
   $scope.scoreFourKind = function(){
+    combineArrays();
     var four = RollServices.fourKind(hand);
     $scope.fourKind = four;
     $scope.lowerTotal += four;
@@ -143,6 +168,7 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
 
 
   function checkBonus(){
+    combineArrays();
     if($scope.upperTotal >= 63 && $scope.upperBonus != 35){
       $scope.upperBonus = 35;
       $scope.upperTotal += 35;
@@ -154,14 +180,14 @@ app.controller('RollController', ['$scope', 'RollServices', function($scope, Rol
     checkBonus();
     $scope.rolled = $scope.rollMax = false;
     $scope.noScore = true;
-    $scope.dice = '';
+    $scope.dice = $scope.heldDice = '';
     hand = undefined;
     turnRolls = 0;
     gameTurns++;
     heldDice = [];
     numToRoll = 5;
     if(gameTurns >= 13){
-      alert("GAME OVER MAN");
+      $scope.gameOver = true;
     }
   }
 

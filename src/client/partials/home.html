@@ -63,20 +63,33 @@
       </tr>
     </table>
   </div>
-
+  <div class = 'center'>
+    <h3 ng-show='gameOver'>Game over!  Your total was {{upperTotal + lowerTotal}}</h3>
+  </div>
   <div class='dice-div'>
     <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
     <div class = 'centered'>
       <button ng-disabled='rollMax' class='btn btn-success' ng-click ='roll()'>Roll!</button>
 
       <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
-    </div>
+      </div>
 
-    <div class ='centered'>
-      <div class='dice-box' ng-repeat='die in dice track by $index'>
-        <span ng-class = 'color' ng-click='hold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+      <div class ='centered'>
+        <div class='dice-box' ng-repeat='die in dice track by $index'>
+          <span ng-class = 'color' ng-click='hold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+        </div>
+      </div>
+      <div class = 'centered'>
+        <h3>Held Dice</h3>
+        <hr>
+      </div>
+      <div class='centered'>
+        <div class='dice-box' ng-repeat='die in heldDice track by $index'>
+          <span ng-class = 'color' ng-click='unhold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+        </div>
       </div>
     </div>
+
 
   </div>
 
