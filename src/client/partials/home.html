@@ -1,0 +1,84 @@
+<h1 class='center'>(not) Yahtzee</h1>
+<br>
+<div class = "container">
+
+  <div class = 'table-box'>
+
+    <table class= 'table table-bordered'>
+      <th class = 'cat-box'>Category</th>
+      <th class = 'score-box'>Score</th>
+      <th class = 'cat-box'>Category</th>
+      <th class = 'score-box'>Score</th>
+      <tr>
+        <td>Ones</td>
+        <td ng-disabled ='onesClicked' ng-click='scoreOnes()'>{{oneScore}}</td>
+        <td>Three of a Kind</td>
+        <td ng-click='scoreThreeKind()'>{{threeKind}}</td>
+      </tr>
+      <tr>
+        <td>Twos</td>
+        <td ng-click='scoreTwos()'>{{twoScore}}</td>
+        <td>Four of a Kind</td>
+        <td ng-click='scoreFourKind()'>{{fourKind}}</td>
+      </tr>
+      <tr>
+        <td>Threes</td>
+        <td ng-click='scoreThrees()'>{{threeScore}}</td>
+        <td>Full House</td>
+        <td ng-click='scoreHouse()'>{{fullHouse}}</td>
+      </tr>
+      <tr>
+        <td>Fours</td>
+        <td ng-click='scoreFours()'>{{fourScore}}</td>
+        <td>Small Straight</td>
+        <td ng-click='scoreSml()'>{{smallStraight}}</td>
+      </tr>
+      <tr>
+        <td>Fives</td>
+        <td ng-click='scoreFives()'>{{fiveScore}}</td>
+        <td>Large Straight</td>
+        <td ng-click='scoreLrg()'>{{largeStraight}}</td>
+      </tr>
+      <tr>
+        <td>Sixes</td>
+        <td ng-click='scoreSixes()'>{{sixScore}}</td>
+        <td>Yahtzee</td>
+        <td ng-click='scoreYahtzee()'>{{yahtzee}}</td>
+      </tr>
+      <tr>
+        <td class='italic'>Upper Bonus</td>
+        <td>{{upperBonus}}</td>
+        <td>Chance</td>
+        <td ng-click='scoreChance()'>{{chance}}</td>
+      </tr>
+      <tr>
+        <td class='total-title'>Upper Total</td>
+        <td>{{upperTotal}}</td>
+        <td class='total-title'>Lower Total</td>
+        <td>{{lowerTotal}}</td>
+      </tr>
+      <tr>
+        <td class='total-title'>Grand Total</td>
+        <td colspan = 3>{{upperTotal + lowerTotal}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class='dice-div'>
+    <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
+    <div class = 'centered'>
+      <button ng-disabled='rollMax' class='btn btn-success' ng-click ='roll()'>Roll!</button>
+
+      <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
+    </div>
+
+    <div class ='centered'>
+      <div class='dice-box' ng-repeat='die in dice track by $index'>
+        <span ng-class = 'color' ng-click='hold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

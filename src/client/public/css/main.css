@@ -1,0 +1,46 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.center{
+  text-align: center;
+}
+
+.centered{
+  display: table;
+  margin: auto;
+}
+
+.die-span{
+  font-size: 100px;
+  margin-left: 5px;
+}
+
+.dice-box{
+  display: table-cell;
+}
+
+.btn{
+  margin: 5px;
+}
+
+.red{
+  color: red;
+}
+
+.black{
+  color: black;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.total-title{
+  font-weight: bold;
+}
