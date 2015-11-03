@@ -11,45 +11,45 @@
       <th class = 'score-box'>Score</th>
       <tr>
         <td>Ones</td>
-        <td ng-disabled ='onesClicked' ng-click='scoreOnes()'>{{oneScore}}</td>
+        <td ng-disabled ='onesClicked' ng-click='scoreOnes()'>{{upper.oneScore}}</td>
         <td>Three of a Kind</td>
-        <td ng-click='scoreThreeKind()'>{{threeKind}}</td>
+        <td ng-click='scoreThreeKind()'>{{lower.threeKind}}</td>
       </tr>
       <tr>
         <td>Twos</td>
-        <td ng-click='scoreTwos()'>{{twoScore}}</td>
+        <td ng-click='scoreTwos()'>{{upper.twoScore}}</td>
         <td>Four of a Kind</td>
-        <td ng-click='scoreFourKind()'>{{fourKind}}</td>
+        <td ng-click='scoreFourKind()'>{{lower.fourKind}}</td>
       </tr>
       <tr>
         <td>Threes</td>
-        <td ng-click='scoreThrees()'>{{threeScore}}</td>
+        <td ng-click='scoreThrees()'>{{upper.threeScore}}</td>
         <td>Full House</td>
-        <td ng-click='scoreHouse()'>{{fullHouse}}</td>
+        <td ng-click='scoreHouse()'>{{lower.fullHouse}}</td>
       </tr>
       <tr>
         <td>Fours</td>
-        <td ng-click='scoreFours()'>{{fourScore}}</td>
+        <td ng-click='scoreFours()'>{{upper.fourScore}}</td>
         <td>Small Straight</td>
-        <td ng-click='scoreSml()'>{{smallStraight}}</td>
+        <td ng-click='scoreSml()'>{{lower.smallStraight}}</td>
       </tr>
       <tr>
         <td>Fives</td>
-        <td ng-click='scoreFives()'>{{fiveScore}}</td>
+        <td ng-click='scoreFives()'>{{upper.fiveScore}}</td>
         <td>Large Straight</td>
-        <td ng-click='scoreLrg()'>{{largeStraight}}</td>
+        <td ng-click='scoreLrg()'>{{lower.largeStraight}}</td>
       </tr>
       <tr>
         <td>Sixes</td>
-        <td ng-click='scoreSixes()'>{{sixScore}}</td>
+        <td ng-click='scoreSixes()'>{{upper.sixScore}}</td>
         <td>Yahtzee</td>
-        <td ng-click='scoreYahtzee()'>{{yahtzee}}</td>
+        <td ng-click='scoreYahtzee()'>{{lower.yahtzee}}</td>
       </tr>
       <tr>
         <td class='italic'>Upper Bonus</td>
         <td>{{upperBonus}}</td>
         <td>Chance</td>
-        <td ng-click='scoreChance()'>{{chance}}</td>
+        <td ng-click='scoreChance()'>{{lower.chance}}</td>
       </tr>
       <tr>
         <td class='total-title'>Upper Total</td>
@@ -63,13 +63,15 @@
       </tr>
     </table>
   </div>
-  <div class = 'center'>
-    <h3 ng-show='gameOver'>Game over!  Your total was {{upperTotal + lowerTotal}}</h3>
+  <div ng-show='gameOver' class = 'center'>
+    <h3 >Game over!  Your total was {{upperTotal + lowerTotal}}</h3>
+    <button class='btn btn-primary' ng-click='reset()'>Play Again?</button>
   </div>
   <div class='dice-div'>
     <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
     <div class = 'centered'>
-      <button ng-disabled='rollMax' class='btn btn-success' ng-click ='roll()'>Roll!</button>
+<!-- ng-disabled='rollMax' -->
+      <button ng-hide='gameOver'   class='btn btn-success' ng-click ='roll()'>Roll!</button>
 
       <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
       </div>

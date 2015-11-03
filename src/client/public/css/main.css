@@ -7,6 +7,12 @@ a {
   color: #00B7FF;
 }
 
+.small-input{
+  width: 50%;
+  display: table;
+  margin: auto;
+}
+
 .center{
   text-align: center;
 }
@@ -43,4 +49,8 @@ a {
 
 .total-title{
   font-weight: bold;
+}
+
+.header-icon{
+  height: 125%;
 }

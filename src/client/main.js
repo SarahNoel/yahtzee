@@ -5,5 +5,14 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/', {
       templateUrl: 'partials/home.html'
     })
+    .when('/stats', {
+      templateUrl: 'partials/stats.html'
+    })
+    .when('/loginpage', {
+      templateUrl: 'partials/login.html'
+    })
+    .when('/logoutpage', {
+      templateUrl: 'partials/logout.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);

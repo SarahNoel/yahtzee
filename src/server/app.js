@@ -13,8 +13,11 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var expressSession = require('express-session');
 
+var User = mongoose.model('users');
+
 // *** routes *** //
 var routes = require('./routes/index.js');
+var userRoutes = require('./routes/users.js');
 
 
 // *** express instance *** //
@@ -48,7 +51,14 @@ app.use(passport.session());
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/users/', userRoutes);
 
+// passport config
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+
+passport.deserializeUser(User.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,8 +74,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send('error', {
+    res.status(err.status || 500)
+    .send('error', {
       message: err.message,
       error: err
     });
@@ -75,8 +85,8 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.send('error', {
+  res.status(err.status || 500)
+  .send('error', {
     message: err.message,
     error: {}
   });
