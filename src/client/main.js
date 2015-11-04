@@ -17,5 +17,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/register', {
       templateUrl: 'partials/register.html'
     })
+    .when('/vs', {
+      templateUrl: 'partials/vs.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);

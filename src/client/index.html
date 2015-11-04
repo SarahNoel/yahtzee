@@ -35,6 +35,8 @@
 
         <li class='header-text fancy-font' ng-class="{'active': isActive('/play')}"><a href="/#/play">Play!</a></li>
 
+        <li class='header-text fancy-font' ng-class="{'active': isActive('/vs')}"><a href="/#/vs">VS!</a></li>
+
         <li ng-show= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/stats')}"><a href="/#/stats">User Stats</a></li>
 
         <li ng-hide= 'isLoggedIn()' class='header-text fancy-font' ng-class="{'active': isActive('/loginpage') || isActive('/register')}"><a href="/#/loginpage">User Login</a></li>

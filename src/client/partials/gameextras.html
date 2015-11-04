@@ -1,0 +1,34 @@
+<div ng-show='gameOver' class = 'center'>
+    <h3 >Game over!  Your total was {{scoreObj.upperTotal + scoreObj.lowerTotal}}</h3>
+    <button class='btn btn-primary' ng-click='reset()'>Play Again?</button>
+  </div>
+  <div class='dice-div'>
+    <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
+    <h3 class= 'center' ng-show = 'yahtzeed'>Any additional Yahtzees will score you an additional 50 points! </h3>
+    <h3 class= 'center' ng-show = 'turnOver'>Your turn is over!</h3>
+    <div class = 'centered'>
+
+      <button ng-hide='gameOver; turnOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
+
+      <button ng-show='turnOver' class='btn btn-danger' ng-click = 'passPlay()'>End Turn</button>
+
+      </div>
+
+      <div class ='centered'>
+        <div class='dice-box' ng-repeat='die in dice track by $index'>
+          <span ng-click='hold(die, $index); selected =! selected' class='die-span black'><img class='die-face' src= {{die.face}}></span>
+        </div>
+      </div>
+      <div class = 'centered move-up' ng-show = 'heldDice.length > 0'>
+        <h3>Held Dice</h3>
+        <hr>
+      </div>
+      <div class='centered'>
+        <div class='dice-box' ng-repeat='die in heldDice track by $index'>
+          <span ng-class = 'color' ng-click='unhold(die, $index); selected =! selected' class='die-span lower-span'><img class='die-face' src= {{die.face}}> </span>
+        </div>
+      </div>
+    </div>
+
+
+  </div>

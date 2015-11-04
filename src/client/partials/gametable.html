@@ -1,0 +1,57 @@
+  <table class= 'table table-bordered'>
+      <th class='category cat-box'>Category</th>
+      <th class = 'score score-box'>Score</th>
+      <th class = 'category cat-box'>Category</th>
+      <th class = 'score score-box'>Score</th>
+      <tr>
+        <td class='category'>Ones <button class='nada'uib-popover="Total of all ones" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreOnes()'>{{scoreObj.oneScore}}</td>
+        <td class='category'>Three of a Kind <button class='nada'uib-popover="Total of all dice, if set of three" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score'ng-click='scoreThreeKind()'>{{scoreObj.threeKind}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Twos <button class='nada'uib-popover="Total of all twos" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreTwos()'>{{scoreObj.twoScore}}</td>
+        <td class='category'>Four of a Kind <button class='nada'uib-popover="Total of all dice, if set of four" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFourKind()'>{{scoreObj.fourKind}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Threes <button class='nada'uib-popover="Total of all threes" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreThrees()'>{{scoreObj.threeScore}}</td>
+        <td class='category'>Full House <button class='nada'uib-popover="25 points for a pair and a set of three" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreHouse()'>{{scoreObj.fullHouse}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Fours <button class='nada'uib-popover="Total of all fours" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFours()'>{{scoreObj.fourScore}}</td>
+        <td class='category'>Small Straight <button class='nada'uib-popover="30 points if four in a row" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreSml()'>{{scoreObj.smallStraight}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Fives <button class='nada'uib-popover="Total of all fives" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFives()'>{{scoreObj.fiveScore}}</td>
+        <td class='category'>Large Straight <button class='nada'uib-popover="40 points if five in a row" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreLrg()'>{{scoreObj.largeStraight}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Sixes <button class='nada'uib-popover="Total of all sixes" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreSixes()'>{{scoreObj.sixScore}}</td>
+        <td class='category'>Yahtzee <button class='nada'uib-popover="50 points if all dice are the same" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreYahtzee()'>{{scoreObj.yahtzee}}</td>
+      </tr>
+      <tr>
+        <td class='italic'>Upper Bonus <button class='nada'uib-popover="35 points if upper total is 63+" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score'>{{upperBonus}}</td>
+        <td class='category'>Chance <button class='nada'uib-popover="Total of all dice" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreChance()'>{{scoreObj.chance}}</td>
+      </tr>
+      <tr>
+        <td class='total-title category'>Upper Total</td>
+        <td class='score total-title'>{{scoreObj.upperTotal}}</td>
+        <td class='total-title category'>Lower Total</td>
+        <td class='score total-title'>{{scoreObj.lowerTotal}}</td>
+      </tr>
+      <tr>
+        <td class='grand-title center' colspan = 4>Grand Total :  {{scoreObj.upperTotal + scoreObj.lowerTotal}}</td>
+      </tr>
+    </table>

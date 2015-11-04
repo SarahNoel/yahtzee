@@ -105,7 +105,9 @@ li a{
 .btn-primary:hover,
 .btn-primary:disabled,
 .btn-primary:active,
-.btn-primary:disabled:hover{
+.btn-primary:disabled:hover,
+.btn-primary:active:focus,
+.btn-primary:focus {
   background-color: #613d6f;
   padding: 8px;
 
@@ -120,7 +122,9 @@ li a{
 .btn-success:hover,
 .btn-success:disabled,
 .btn-success:active,
-.btn-success:disabled:hover{
+.btn-success:disabled:hover,
+.btn-success:active:focus,
+.btn-success:focus{
   background-color: #245a5f;
   padding: 8px;
 
@@ -136,4 +140,16 @@ li a{
 
 .bigger{
   font-size: 50px;
+}
+
+
+.inline{
+  display: inline;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+
+.btn-set{
+  width: 115px;
 }

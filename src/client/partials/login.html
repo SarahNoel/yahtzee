@@ -14,9 +14,9 @@
       </div>
 
     <div ng-show='error'><h4>{{errorMessage}}</h4></div>
+    <button ng-disabled="loginFormName.$invalid" class='btn btn-primary' ng-click="login()">Login</button>
   </form>
 
-    <button ng-disabled="loginFormName.$invalid" class='btn btn-primary' ng-click="login()">Login</button>
     <br><br>
     <a href="/#/register"><button type='button'class='btn btn-warning'>Need an Account?</button></a>
   </div>

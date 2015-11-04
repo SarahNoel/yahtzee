@@ -8,7 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var http = require("http");
+var http = require('http').Server(app);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var expressSession = require('express-session');
@@ -22,6 +22,18 @@ var userRoutes = require('./routes/users.js');
 
 // *** express instance *** //
 var app = express();
+
+// Create an http server with Node's HTTP module.
+// Pass it the Express application, and listen on port 8080.
+var server = require('http').createServer(app).listen(8080);
+
+// Instantiate Socket.IO hand have it listen on the Express/HTTP server
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+    console.log('client connected');
+    // agx.initGame(io, socket);
+});
 
 // *** config file *** //
 var config = require('./_config');

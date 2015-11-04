@@ -8,11 +8,10 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
   var bonus;
   var playerYahtzees = 0;
 
-  $scope.upper = {};
-  $scope.lower = {};
+  $scope.scoreObj = {};
   $scope.noScore = true;
-  $scope.upperTotal = 0;
-  $scope.lowerTotal = 0;
+  $scope.scoreObj.upperTotal = 0;
+  $scope.scoreObj.lowerTotal = 0;
   $scope.grandTotal = 0;
   $scope.showLogin = true;
   $scope.registerForm = {};
@@ -60,8 +59,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
       $scope.noScore = false;
       var onesScore = RollServices.score(hand, 1);
       bonus = checkYahtzee();
-      $scope.upper.oneScore = onesScore + bonus;
-      $scope.upperTotal += onesScore + bonus;
+      $scope.scoreObj.oneScore = onesScore + bonus;
+      $scope.scoreObj.upperTotal += onesScore + bonus;
       confirmScore();
     }
   };
@@ -71,8 +70,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.twoScore === undefined && hand !== undefined){
       var twosScore = RollServices.score(hand, 2);
       bonus = checkYahtzee();
-      $scope.upper.twoScore = twosScore + bonus;
-      $scope.upperTotal += twosScore + bonus;
+      $scope.scoreObj.twoScore = twosScore + bonus;
+      $scope.scoreObj.upperTotal += twosScore + bonus;
       confirmScore();
     }
   };
@@ -82,8 +81,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.threeScore === undefined && hand !== undefined){
       var threesScore = RollServices.score(hand, 3);
       bonus = checkYahtzee();
-      $scope.upper.threeScore = threesScore + bonus;
-      $scope.upperTotal += threesScore + bonus;
+      $scope.scoreObj.threeScore = threesScore + bonus;
+      $scope.scoreObj.upperTotal += threesScore + bonus;
       confirmScore();
     }
   };
@@ -93,8 +92,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.fourScore === undefined && hand !== undefined){
       var foursScore = RollServices.score(hand, 4);
       bonus = checkYahtzee();
-      $scope.upper.fourScore = foursScore + bonus;
-      $scope.upperTotal += foursScore + bonus;
+      $scope.scoreObj.fourScore = foursScore + bonus;
+      $scope.scoreObj.upperTotal += foursScore + bonus;
       confirmScore();
     }
   };
@@ -104,8 +103,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.fiveScore === undefined && hand !== undefined){
       var fivesScore = RollServices.score(hand, 5);
       bonus = checkYahtzee();
-      $scope.upper.fiveScore = fivesScore + bonus;
-      $scope.upperTotal += fivesScore + bonus;
+      $scope.scoreObj.fiveScore = fivesScore + bonus;
+      $scope.scoreObj.upperTotal += fivesScore + bonus;
       confirmScore();
     }
   };
@@ -115,8 +114,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.sixScore === undefined && hand !== undefined){
       var sixesScore = RollServices.score(hand, 6);
       bonus = checkYahtzee();
-      $scope.upper.sixScore = sixesScore + bonus;
-      $scope.upperTotal += sixesScore + bonus;
+      $scope.scoreObj.sixScore = sixesScore + bonus;
+      $scope.scoreObj.upperTotal += sixesScore + bonus;
       confirmScore();
     }
   };
@@ -128,22 +127,22 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     if($scope.chance === undefined && hand !== undefined){
       var chanceTotal = RollServices.chance(hand);
       bonus = checkYahtzee();
-      $scope.lower.chance = chanceTotal + bonus;
-      $scope.lowerTotal += chanceTotal + bonus;
+      $scope.scoreObj.chance = chanceTotal + bonus;
+      $scope.scoreObj.lowerTotal += chanceTotal + bonus;
       confirmScore();
     }
   };
 
    $scope.scoreYahtzee = function(){
     combineArrays();
-    if($scope.yahtzee === undefined && hand !== undefined){
+    if($scope.scoreObj.yahtzee === undefined && hand !== undefined){
       var yahtzee = RollServices.yahtzee(hand);
       if(yahtzee !== 0){
         playerYahtzees++;
         $scope.yahtzeed = true;
       }
-      $scope.lower.yahtzee = yahtzee;
-      $scope.lowerTotal += yahtzee;
+      $scope.scoreObj.yahtzee = yahtzee;
+      $scope.scoreObj.lowerTotal += yahtzee;
       confirmScore();
     }
   };
@@ -152,8 +151,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     var lrg = RollServices.lrgStraight(hand);
     bonus = checkYahtzee();
-    $scope.lower.largeStraight = lrg + bonus;
-    $scope.lowerTotal += lrg + bonus;
+    $scope.scoreObj.largeStraight = lrg + bonus;
+    $scope.scoreObj.lowerTotal += lrg + bonus;
     confirmScore();
   };
 
@@ -161,8 +160,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     var sml = RollServices.smlStraight(hand);
     bonus = checkYahtzee();
-    $scope.lower.smallStraight = sml + bonus;
-    $scope.lowerTotal += sml + bonus;
+    $scope.scoreObj.smallStraight = sml + bonus;
+    $scope.scoreObj.lowerTotal += sml + bonus;
     confirmScore();
   };
 
@@ -170,8 +169,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     var house = RollServices.fullHouse(hand);
     bonus = checkYahtzee();
-    $scope.lower.fullHouse = house + bonus;
-    $scope.lowerTotal += house + bonus;
+    $scope.scoreObj.fullHouse = house + bonus;
+    $scope.scoreObj.lowerTotal += house + bonus;
     confirmScore();
   };
 
@@ -179,8 +178,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     var three = RollServices.threeKind(hand);
     bonus = checkYahtzee();
-    $scope.lower.threeKind = three + bonus;
-    $scope.lowerTotal += three + bonus;
+    $scope.scoreObj.threeKind = three + bonus;
+    $scope.scoreObj.lowerTotal += three + bonus;
     confirmScore();
   };
 
@@ -188,17 +187,17 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     var four = RollServices.fourKind(hand);
     bonus = checkYahtzee();
-    $scope.lower.fourKind = four + bonus;
-    $scope.lowerTotal += four + bonus;
+    $scope.scoreObj.fourKind = four + bonus;
+    $scope.scoreObj.lowerTotal += four + bonus;
     confirmScore();
   };
 
 
   function checkBonus(){
     combineArrays();
-    if($scope.upperTotal >= 63 && $scope.upperBonus != 35){
+    if($scope.scoreObj.upperTotal >= 63 && $scope.upperBonus != 35){
       $scope.upperBonus = 35;
-      $scope.upperTotal += 35;
+      $scope.scoreObj.upperTotal += 35;
     }
   }
 
@@ -219,7 +218,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
       console.log($scope.showUser);
       if($scope.showUser !== undefined){
         var sendData = {};
-        var grandTotal = ($scope.upperTotal + $scope.lowerTotal);
+        var grandTotal = ($scope.scoreObj.upperTotal + $scope.scoreObj.lowerTotal);
         var gamesPlayed = ($scope.showUser.gamesPlayed+= 1);
         var points = ($scope.showUser.pointsScored + grandTotal);
         if(grandTotal > $scope.showUser.highScore){
@@ -297,8 +296,8 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
         gameTurns = 0;
         heldDice = [];
         numToRoll = 5;
-        $scope.lower = $scope.upper = {};
-        $scope.lowerTotal = $scope.upperTotal = 0;
+        $scope.scoreObj = {};
+        $scope.scoreObj.lowerTotal = $scope.scoreObj.upperTotal = 0;
       };
 
       $scope.isLoggedIn= function(){
@@ -307,7 +306,6 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
 
       function checkYahtzee(){
         var yaht = RollServices.yahtzee(hand);
-        console.log(yaht);
         if(yaht === 50 && $scope.yahtzee !== ''){
           playerYahtzees++;
           return 50;
@@ -321,8 +319,272 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
 }]);
 
 
+app.controller('PvPController', ['$scope', '$location', '$rootScope', 'RollServices', function($scope, $location, $rootScope, RollServices){
+  $scope.player1 = true;
+  var turnRolls = 0;
+  var gameTurns = 0;
+  var hand;
+  var numToRoll = 5;
+  var heldDice = [];
+  var bonus;
+
+  $scope.scoreObj = {};
+  $scope.p1Scores = {};
+  $scope.p2Scores = {};
+  $scope.noScore = true;
+  $scope.p1Scores.upperTotal = 0;
+  $scope.p1Scores.lowerTotal = 0;
+  $scope.scoreObj.upperTotal = 0;
+  $scope.scoreObj.lowerTotal = 0;
+  $scope.grandTotal = 0;
+  $scope.p2Scores.upperTotal = 0;
+  $scope.p2Scores.lowerTotal = 0;
+
+  function combineArrays(){
+    for (var i = 0; i < heldDice.length; i++) {
+      hand.push(heldDice[i]);
+    }
+  }
+
+  $scope.roll = function (){
+    if(turnRolls >= 2){
+      $scope.rollMax = true;
+    }
+    turnRolls ++;
+    $scope.rolled = true;
+    var dice = RollServices.roll(numToRoll);
+    $scope.dice = dice;
+    hand = dice;
+  };
+
+  $scope.hold = function(die, index){
+    heldDice.push(die);
+    hand.splice(index, 1);
+    numToRoll--;
+    $scope.heldDice = heldDice;
+  };
+
+  $scope.unhold = function(die, index){
+    hand.push(die);
+    heldDice.splice(index, 1);
+    numToRoll++;
+  };
 
 
+  //upper total functions
+  $scope.scoreOnes = function(){
+    combineArrays();
+    if($scope.oneScore === undefined && hand !== undefined){
+      $scope.noScore = false;
+      var onesScore = RollServices.score(hand, 1);
+      bonus = checkYahtzee();
+      $scope.scoreObj.oneScore = onesScore + bonus;
+      $scope.scoreObj.upperTotal += onesScore + bonus;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreTwos = function(){
+    combineArrays();
+    if($scope.twoScore === undefined && hand !== undefined){
+      var twosScore = RollServices.score(hand, 2);
+      bonus = checkYahtzee();
+      $scope.scoreObj.twoScore = twosScore + bonus;
+      $scope.scoreObj.upperTotal += twosScore + bonus;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreThrees = function(){
+    combineArrays();
+    if($scope.threeScore === undefined && hand !== undefined){
+      var threesScore = RollServices.score(hand, 3);
+      bonus = checkYahtzee();
+      $scope.scoreObj.threeScore = threesScore + bonus;
+      $scope.scoreObj.upperTotal += threesScore + bonus;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreFours = function(){
+    combineArrays();
+    if($scope.fourScore === undefined && hand !== undefined){
+      var foursScore = RollServices.score(hand, 4);
+      bonus = checkYahtzee();
+      $scope.scoreObj.fourScore = foursScore + bonus;
+      $scope.scoreObj.upperTotal += foursScore + bonus;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreFives = function(){
+    combineArrays();
+    if($scope.fiveScore === undefined && hand !== undefined){
+      var fivesScore = RollServices.score(hand, 5);
+      bonus = checkYahtzee();
+      $scope.scoreObj.fiveScore = fivesScore + bonus;
+      $scope.scoreObj.upperTotal += fivesScore + bonus;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreSixes = function(){
+    combineArrays();
+    if($scope.sixScore === undefined && hand !== undefined){
+      var sixesScore = RollServices.score(hand, 6);
+      bonus = checkYahtzee();
+      $scope.scoreObj.sixScore = sixesScore + bonus;
+      $scope.scoreObj.upperTotal += sixesScore + bonus;
+      confirmScore();
+    }
+  };
+
+  //lower total functions
+
+  $scope.scoreChance = function(){
+    combineArrays();
+    if($scope.chance === undefined && hand !== undefined){
+      var chanceTotal = RollServices.chance(hand);
+      bonus = checkYahtzee();
+      $scope.scoreObj.chance = chanceTotal + bonus;
+      $scope.scoreObj.lowerTotal += chanceTotal + bonus;
+      confirmScore();
+    }
+  };
+
+   $scope.scoreYahtzee = function(){
+    combineArrays();
+    if($scope.scoreObj.yahtzee === undefined && hand !== undefined){
+      var yahtzee = RollServices.yahtzee(hand);
+      if(yahtzee !== 0){
+        $scope.scoreObj.yahtzeed = true;
+      }
+      $scope.scoreObj.yahtzee = yahtzee;
+      $scope.scoreObj.lowerTotal += yahtzee;
+      confirmScore();
+    }
+  };
+
+  $scope.scoreLrg = function(){
+    combineArrays();
+    var lrg = RollServices.lrgStraight(hand);
+    bonus = checkYahtzee();
+    $scope.scoreObj.largeStraight = lrg + bonus;
+    $scope.scoreObj.lowerTotal += lrg + bonus;
+    confirmScore();
+  };
+
+  $scope.scoreSml = function(){
+    combineArrays();
+    var sml = RollServices.smlStraight(hand);
+    bonus = checkYahtzee();
+    $scope.scoreObj.smallStraight = sml + bonus;
+    $scope.scoreObj.lowerTotal += sml + bonus;
+    confirmScore();
+  };
+
+  $scope.scoreHouse = function(){
+    combineArrays();
+    var house = RollServices.fullHouse(hand);
+    bonus = checkYahtzee();
+    $scope.scoreObj.fullHouse = house + bonus;
+    $scope.scoreObj.lowerTotal += house + bonus;
+    confirmScore();
+  };
+
+  $scope.scoreThreeKind = function(){
+    combineArrays();
+    var three = RollServices.threeKind(hand);
+    bonus = checkYahtzee();
+    $scope.scoreObj.threeKind = three + bonus;
+    $scope.scoreObj.lowerTotal += three + bonus;
+    confirmScore();
+  };
+
+  $scope.scoreFourKind = function(){
+    combineArrays();
+    var four = RollServices.fourKind(hand);
+    bonus = checkYahtzee();
+    $scope.scoreObj.fourKind = four + bonus;
+    $scope.scoreObj.lowerTotal += four + bonus;
+    confirmScore();
+  };
 
 
+  function checkBonus(){
+    combineArrays();
+    if($scope.scoreObj.upperTotal >= 63 && $scope.upperBonus != 35){
+      $scope.upperBonus = 35;
+      $scope.scoreObj.upperTotal += 35;
+    }
+  }
 
+  function confirmScore (){
+    $scope.noScore = true;
+    checkBonus();
+    $scope.rolled = $scope.rollMax = false;
+    $scope.dice = $scope.heldDice = '';
+    hand = undefined;
+    turnRolls = 0;
+    gameTurns++;
+    heldDice = [];
+    numToRoll = 5;
+    $scope.turnOver = true;
+
+  }
+
+  $scope.passPlay = function () {
+    $scope.turnOver = false;
+    if($scope.player1){
+      $scope.p1Scores = $scope.scoreObj;
+      $scope.scoreObj = $scope.p2Scores;
+      $scope.player1 = false;
+    }
+    else{
+      $scope.p2Scores = $scope.scoreObj;
+      $scope.scoreObj = $scope.p1Scores;
+      $scope.player1 = true;
+    }
+    if(gameTurns >= 26){
+      $scope.pvpGameOver = true;
+      $scope.p1Scores.yahtzeed = $scope.p2Scores.yahtzeed= false;
+      if($scope.p1Scores.upperTotal + $scope.p1Scores.lowerTotal > $scope.p2Scores.upperTotal + $scope.p2Scores.lowerTotal){
+        $scope.winnerName = $scope.playerName.p1Name + " Wins!";
+      }else if($scope.p1Scores.upperTotal + $scope.p1Scores.lowerTotal < $scope.p2Scores.upperTotal + $scope.p2Scores.lowerTotal){
+        $scope.winnerName = $scope.playerName.p2Name + " Wins!";
+      }else{
+        $scope.winnerName = "No way!  It's a tie!";
+      }
+    }
+  };
+
+  $scope.reset = function(){
+    $scope.pvpGameOver = $scope.scoreObj.yahtzeed = $scope.rolled = $scope.rollMax = $scope.turnOver =  false;
+    $scope.noScore = $scope.player1 = true;
+    $scope.dice = $scope.heldDice = $scope.upperBonus = '';
+    hand = undefined;
+    turnRolls = 0;
+    gameTurns = 0;
+    heldDice = [];
+    numToRoll = 5;
+    $scope.p1Scores = $scope.scoreObj = {};
+    $scope.p2Scores = {};
+    $scope.p1Scores.upperTotal = $scope.p2Scores.upperTotal = $scope.p1Scores.lowerTotal = $scope.p2Scores.lowerTotal = $scope.scoreObj.lowerTotal = $scope.scoreObj.upperTotal = 0;
+    $scope.scoreObj = $scope.p1Scores;
+  };
+
+  $scope.changeNames = function(){
+    $scope.playerName = {};
+    $scope.playersPicked = false;
+  };
+
+  function checkYahtzee(){
+      var yaht = RollServices.yahtzee(hand);
+      if(yaht === 50 && $scope.yahtzee !== ''){
+        return 50;
+      }
+      else{
+        return 0;
+      }
+    }
+}]);

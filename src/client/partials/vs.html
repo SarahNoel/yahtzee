@@ -1,0 +1,68 @@
+<div ng-controller = 'PvPController'>
+  <div ng-hide ='playersPicked' class = 'center'>
+    <form name ='playerNameForm'>
+      <div class ='form'>
+        <div class ='form-group'>
+          <h1 class = 'fancy-font'>Choose Player Names!</h1>
+          <input type="text" class="form-control small-input" placeholder="Player 1" ng-model="playerName.p1Name" required>
+        </div>
+
+        <div class='form-group'>
+          <br>
+          <input type="text" class="form-control small-input" placeholder="Player 2" ng-model="playerName.p2Name" required>
+        </div>
+
+      <button ng-disabled="playerNameForm.$invalid" class='btn btn-primary' ng-click="playersPicked = true">Begin!</button>
+      <br>
+      <h4>Ready for a head-to-head battle?</h4>
+      <h4>Just pick names and you're off!</h4>
+      <br>
+
+    </form>
+
+  </div>
+</div>
+
+  <div ng-hide='pvpGameOver'>
+  <div ng-show='playersPicked' class ='center'>
+  <h3 class='fancy-font inline'>{{playerName.p1Name}}'s Score: {{p1Scores.upperTotal + p1Scores.lowerTotal}}</h3>
+
+  <h3 class='fancy-font center inline'>{{playerName.p2Name}}'s Score: {{p2Scores.upperTotal + p2Scores.lowerTotal}}</h3>
+
+    <div ng-show= 'player1'>
+    <h1 class= 'fancy-font center'>{{playerName.p1Name}}'s Turn</h1>
+    </div>
+
+    <div ng-hide= 'player1'>
+    <h1 class= 'fancy-font center'>{{playerName.p2Name}}'s Turn</h1>
+    </div>
+
+    <div ng-include src="'partials/gametable.html'"> </div>
+    <div ng-include src="'partials/gameextras.html'"> </div>
+
+
+  </div>
+  </div>
+
+  <div ng-show = 'pvpGameOver' class= 'center'>
+    <h1 class= 'fancy-font center bigger'>Game Over!</h1>
+    <h1 class= 'fancy-font center'>{{winnerName}}</h1>
+    <h2 class='fancy-font center inline'>{{playerName.p1Name}}'s Score:{{p1Scores.upperTotal + p1Scores.lowerTotal}}</h2>
+    <h2 class='fancy-font center inline'>{{playerName.p2Name}}'s Score:{{p2Scores.upperTotal + p2Scores.lowerTotal}}</h2>
+    <br>
+    <br>
+    <button ng-click='reset()' class='btn btn-primary'>Play Again?</button>
+    <br>
+    <button ng-click='reset(); changeNames()'class='btn btn-warning'>Change Player Names?</button>
+
+
+  </div>
+
+
+
+
+
+
+
+</div>
+
