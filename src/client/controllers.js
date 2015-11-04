@@ -306,7 +306,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
 
       function checkYahtzee(){
         var yaht = RollServices.yahtzee(hand);
-        if(yaht === 50 && $scope.yahtzee !== ''){
+        if(yaht === 50 && $scope.scoreObj.yahtzee === 50){
           playerYahtzees++;
           return 50;
         }
@@ -580,7 +580,7 @@ app.controller('PvPController', ['$scope', '$location', '$rootScope', 'RollServi
 
   function checkYahtzee(){
       var yaht = RollServices.yahtzee(hand);
-      if(yaht === 50 && $scope.yahtzee !== ''){
+      if(yaht === 50 && $scope.scoreObj.yahtzee === 50){
         return 50;
       }
       else{

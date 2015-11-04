@@ -8,7 +8,9 @@
     <h3 class= 'center' ng-show = 'turnOver'>Your turn is over!</h3>
     <div class = 'centered'>
 
-      <button ng-hide='gameOver; turnOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
+      <div ng-hide= 'turnOver'>
+      <button ng-hide='gameOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
+      </div>
 
       <button ng-show='turnOver' class='btn btn-danger' ng-click = 'passPlay()'>End Turn</button>
 
