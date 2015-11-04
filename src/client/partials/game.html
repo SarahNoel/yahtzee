@@ -1,0 +1,99 @@
+<h1 class='center fancy-font'>(not) Yahtzee</h1>
+<br>
+<div class = "container">
+
+  <div class = 'table-box'>
+
+    <table class= 'table table-bordered'>
+      <th class='category cat-box'>Category</th>
+      <th class = 'score score-box'>Score</th>
+      <th class = 'category cat-box'>Category</th>
+      <th class = 'score score-box'>Score</th>
+      <tr>
+        <td class='category'>Ones <button class='nada'uib-popover="Total of all ones" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreOnes()'>{{upper.oneScore}}</td>
+        <td class='category'>Three of a Kind <button class='nada'uib-popover="Total of all dice, if set of three" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score'ng-click='scoreThreeKind()'>{{lower.threeKind}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Twos <button class='nada'uib-popover="Total of all twos" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreTwos()'>{{upper.twoScore}}</td>
+        <td class='category'>Four of a Kind <button class='nada'uib-popover="Total of all dice, if set of four" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFourKind()'>{{lower.fourKind}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Threes <button class='nada'uib-popover="Total of all threes" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreThrees()'>{{upper.threeScore}}</td>
+        <td class='category'>Full House <button class='nada'uib-popover="25 points for a pair and a set of three" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreHouse()'>{{lower.fullHouse}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Fours <button class='nada'uib-popover="Total of all fours" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFours()'>{{upper.fourScore}}</td>
+        <td class='category'>Small Straight <button class='nada'uib-popover="30 points if four in a row" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreSml()'>{{lower.smallStraight}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Fives <button class='nada'uib-popover="Total of all fives" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreFives()'>{{upper.fiveScore}}</td>
+        <td class='category'>Large Straight <button class='nada'uib-popover="40 points if five in a row" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreLrg()'>{{lower.largeStraight}}</td>
+      </tr>
+      <tr>
+        <td class='category'>Sixes <button class='nada'uib-popover="Total of all sixes" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreSixes()'>{{upper.sixScore}}</td>
+        <td class='category'>Yahtzee <button class='nada'uib-popover="50 points if all dice are the same" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreYahtzee()'>{{lower.yahtzee}}</td>
+      </tr>
+      <tr>
+        <td class='italic'>Upper Bonus <button class='nada'uib-popover="35 points if upper total is 63+" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score'>{{upperBonus}}</td>
+        <td class='category'>Chance <button class='nada'uib-popover="Total of all dice" popover-trigger="mouseenter"><i class="fa fa-info-circle"></i></button></td>
+        <td class='score' ng-click='scoreChance()'>{{lower.chance}}</td>
+      </tr>
+      <tr>
+        <td class='total-title category'>Upper Total</td>
+        <td class='score' class='total-title'>{{upperTotal}}</td>
+        <td class='total-title category'>Lower Total</td>
+        <td class='score' class='total-title'>{{lowerTotal}}</td>
+      </tr>
+      <tr>
+        <td class='grand-title center' colspan = 4>Grand Total :  {{upperTotal + lowerTotal}}</td>
+      </tr>
+    </table>
+  </div>
+  <div ng-show='gameOver' class = 'center'>
+    <h3 >Game over!  Your total was {{upperTotal + lowerTotal}}</h3>
+    <button class='btn btn-primary' ng-click='reset()'>Play Again?</button>
+  </div>
+  <div class='dice-div'>
+    <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
+    <div class = 'centered'>
+      <button ng-hide='gameOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
+
+      <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
+
+      </div>
+
+      <div class ='centered'>
+        <div class='dice-box' ng-repeat='die in dice track by $index'>
+          <span ng-click='hold(die, $index); selected =! selected' class='die-span black'><img class='die-face' src= {{die.face}}></span>
+        </div>
+      </div>
+      <div class = 'centered move-up' ng-show = 'heldDice.length > 0'>
+        <h3>Held Dice</h3>
+        <hr>
+      </div>
+      <div class='centered'>
+        <div class='dice-box' ng-repeat='die in heldDice track by $index'>
+          <span ng-class = 'color' ng-click='unhold(die, $index); selected =! selected' class='die-span lower-span'><img class='die-face' src= {{die.face}}> </span>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+

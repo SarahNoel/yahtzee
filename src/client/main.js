@@ -1,9 +1,12 @@
-var app = angular.module('diceApp', ['ngRoute']);
+var app = angular.module('diceApp', ['ngRoute', 'ui.bootstrap']);
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/home.html'
+    })
+    .when('/play', {
+      templateUrl: 'partials/game.html'
     })
     .when('/stats', {
       templateUrl: 'partials/stats.html'
