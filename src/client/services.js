@@ -51,7 +51,7 @@ return{ roll:roll,
     for (var i = 0; i < hand.length; i++) {
       valArr.push(hand[i].value);
     }
-    if(valArr[0] === valArr[1] && valArr[1] === valArr[2] && valArr[2] && valArr[3] === valArr[3] && valArr[4]){
+    if(valArr[0] === valArr[1] && valArr[1] === valArr[2] && valArr[2] === valArr[3] && valArr[3] === valArr[4]){
     return 50;
     }
     else{

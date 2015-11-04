@@ -140,6 +140,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
       var yahtzee = RollServices.yahtzee(hand);
       if(yahtzee !== 0){
         playerYahtzees++;
+        $scope.yahtzeed = true;
       }
       $scope.lower.yahtzee = yahtzee;
       $scope.lowerTotal += yahtzee;
@@ -214,6 +215,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     numToRoll = 5;
     if(gameTurns >= 13){
       $scope.gameOver = true;
+      $scope.yahtzeed = false;
       console.log($scope.showUser);
       if($scope.showUser !== undefined){
         var sendData = {};
@@ -226,7 +228,6 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
         sendData.gamesPlayed = gamesPlayed;
         sendData.pointsScored = points;
         sendData.yahtzees = playerYahtzees;
-        console.log("data???", sendData);
         LoginServices.update(sendData)
         .then(function(data){
           $rootScope.userid = data.user._id;
@@ -251,13 +252,12 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     // call register from service
     LoginServices.register($scope.registerForm.username, $scope.registerForm.password)
       .then(function(data){
-        $rootScope.userid = data.user._id;
-        $scope.showUser = data.user.username;
         $rootScope.user = data.user;
         $scope.showUser = data.user;
-        $scope.registering = false;
-        $location.path('/');
+        $location.path('/play');
+        $scope.registerForm = {};
     }).catch(function (data){
+        $scope.registerForm = {};
         $scope.error = true;
         $scope.errorMessage = data.err.message;
       });
@@ -275,7 +275,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
           $rootScope.userid = data.user._id;
           $rootScope.user = data.user;
           $scope.showUser = data.user;
-          $location.path('/');
+          $location.path('/play');
           $scope.loginForm = {};
         })
         // handle error
@@ -289,7 +289,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
       };
 
       $scope.reset = function(){
-        $scope.gameOver = $scope.rolled = $scope.rollMax = false;
+        $scope.yahtzeed = $scope.gameOver = $scope.rolled = $scope.rollMax = false;
         $scope.noScore = true;
         $scope.dice = $scope.heldDice = $scope.upperBonus = '';
         hand = undefined;
@@ -307,6 +307,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
 
       function checkYahtzee(){
         var yaht = RollServices.yahtzee(hand);
+        console.log(yaht);
         if(yaht === 50 && $scope.yahtzee !== ''){
           playerYahtzees++;
           return 50;

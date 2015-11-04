@@ -14,8 +14,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/loginpage', {
       templateUrl: 'partials/login.html'
     })
-    .when('/logoutpage', {
-      templateUrl: 'partials/logout.html'
+    .when('/register', {
+      templateUrl: 'partials/register.html'
     })
     .otherwise({redirectTo: '/'});
 }]);

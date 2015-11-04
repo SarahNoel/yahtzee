@@ -68,8 +68,11 @@
   </div>
   <div class='dice-div'>
     <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
+    <h3 class= 'center' ng-show = 'yahtzeed'>Any additional Yahtzees will score you an additional 50 points! </h3>
     <div class = 'centered'>
-      <button ng-hide='gameOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
+
+    <!-- ng-disabled='rollMax'  -->
+      <button ng-hide='gameOver'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
 
       <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
 
