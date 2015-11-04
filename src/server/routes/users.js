@@ -61,6 +61,7 @@ router.get('/logout', function(req, res) {
 router.put('/update', function(req, res, next) {
   var query = {'_id': req.session.user._id};
   var update = req.body;
+  console.log(update);
   var options = {new: true};
   User.findOneAndUpdate(query, update, options, function(err, user){
     return res.status(200).json({status: "Updated!", user:user});

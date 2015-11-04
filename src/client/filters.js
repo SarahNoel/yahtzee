@@ -1,8 +1,6 @@
-// app.filter('diceFaceFilter', function(){
-//     return function(input){
-//     var array = input;
-//     array = array.join().replace(/,/g, ', ');
-//     return array;
-//   };
-// });
+app.filter('round', function(){
+    return function(input){
+    return input.toFixed(0);
+  };
+});
 

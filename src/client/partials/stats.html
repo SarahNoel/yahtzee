@@ -1,14 +1,32 @@
 <div class='center'>
-<h2> Here's Your Stats </h2>
+<h1 class='fancy-font bigger'> Here's Your Stats, {{showUser.username}}</h1>
 
-<h4>Signed in as {{showUser.username}}</h4>
+<h2 class='fancy-font'>High Score: <br>
+{{showUser.highScore}}</h2>
 
-<h3>High Score: {{showUser.highScore}}</h3>
+<br>
+<br>
 
-<h4>Total Games Played: {{showUser.gamesPlayed}}</h4>
+<h2 class='fancy-font'>Total Games Played: <br>
+{{showUser.gamesPlayed}}</h2>
 
+<br>
+<br>
 
+<h2 class='fancy-font'>Average Score per Game: <br>
+{{showUser.pointsScored / showUser.gamesPlayed | round}}</h2>
 
+<br>
+<br>
+
+<h2 class='fancy-font'>Yahtzees Rolled: <br>
+{{showUser.yahtzees}}</h2>
+
+<br>
+<br>
+
+<h2 class='fancy-font'>All-Time Points Scored: <br>
+{{showUser.pointsScored}}</h2>
 
 
 

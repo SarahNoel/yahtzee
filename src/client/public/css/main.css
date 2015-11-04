@@ -1,10 +1,24 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Varela Round', sans-serif;
+  background-image: url('/public/vector.jpg');
 }
 
 a {
   color: #00B7FF;
+}
+
+th{
+  background-color: #613d6f;
+  color: whitesmoke;
+}
+
+tr{
+  background-color: #249E87;
+}
+
+.fancy-font{
+  font-family: 'VT323';
 }
 
 .small-input{
@@ -22,13 +36,13 @@ a {
   margin: auto;
 }
 
-.die-span{
-  font-size: 100px;
-  margin-left: 5px;
+.lower-span{
+  margin-top: -20px;
 }
 
 .dice-box{
-  display: table-cell;
+  display: inline-flex;
+
 }
 
 .btn{
@@ -49,8 +63,62 @@ a {
 
 .total-title{
   font-weight: bold;
+  background-color: #1c7e6c;
+  color: whitesmoke;
+
+}
+
+.grand-title{
+  font-weight: bold;
+  background-color: #e54f39;
+  color: whitesmoke;
+  font-size: 20px;
+
 }
 
 .header-icon{
   height: 125%;
+}
+
+li a{
+  font-size: 22px;
+}
+
+.btn-primary{
+  background-color: #7a4d8b;
+  border: #7a4d8b;
+  padding: 8px;
+}
+
+.btn-primary:hover,
+.btn-primary:disabled,
+.btn-primary:active,
+.btn-primary:disabled:hover{
+  background-color: #613d6f;
+  padding: 8px;
+
+}
+
+.btn-success{
+  background-color: #2E7177;
+  border: #2E7177;
+  padding: 8px;
+}
+
+.btn-success:hover,
+.btn-success:disabled,
+.btn-success:active,
+.btn-success:disabled:hover{
+  background-color: #245a5f;
+  padding: 8px;
+
+}
+
+
+.die-face{
+  height: 75px;
+}
+
+.bigger{
+  font-size: 50px;
 }

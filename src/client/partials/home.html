@@ -1,4 +1,4 @@
-<h1 class='center'>(not) Yahtzee</h1>
+<h1 class='center fancy-font'>(not) Yahtzee</h1>
 <br>
 <div class = "container">
 
@@ -53,13 +53,12 @@
       </tr>
       <tr>
         <td class='total-title'>Upper Total</td>
-        <td>{{upperTotal}}</td>
+        <td class='total-title'>{{upperTotal}}</td>
         <td class='total-title'>Lower Total</td>
-        <td>{{lowerTotal}}</td>
+        <td class='total-title'>{{lowerTotal}}</td>
       </tr>
       <tr>
-        <td class='total-title'>Grand Total</td>
-        <td colspan = 3>{{upperTotal + lowerTotal}}</td>
+        <td class='grand-title center' colspan = 4>Grand Total :  {{upperTotal + lowerTotal}}</td>
       </tr>
     </table>
   </div>
@@ -70,24 +69,24 @@
   <div class='dice-div'>
     <h3 class= 'center' ng-show = 'rollMax'>No more rolls!  Please score your hand. </h3>
     <div class = 'centered'>
-<!-- ng-disabled='rollMax' -->
-      <button ng-hide='gameOver'   class='btn btn-success' ng-click ='roll()'>Roll!</button>
+      <button ng-hide='gameOver' ng-disabled='rollMax'  class='btn btn-warning' ng-click ='roll()'>Roll!</button>
 
       <!-- <button ng-disabled ='noScore' class='btn btn-warning' ng-click = 'confirmScore()'>Confirm Score</button> -->
+
       </div>
 
       <div class ='centered'>
         <div class='dice-box' ng-repeat='die in dice track by $index'>
-          <span ng-class = 'color' ng-click='hold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+          <span ng-click='hold(die, $index); selected =! selected' class='die-span black'><img class='die-face' src= {{die.face}}></span>
         </div>
       </div>
-      <div class = 'centered'>
+      <div class = 'centered move-up' ng-show = 'heldDice.length > 0'>
         <h3>Held Dice</h3>
         <hr>
       </div>
       <div class='centered'>
         <div class='dice-box' ng-repeat='die in heldDice track by $index'>
-          <span ng-class = 'color' ng-click='unhold(die, $index); selected =! selected' class='die-span black'>{{die.face}}</span>
+          <span ng-class = 'color' ng-click='unhold(die, $index); selected =! selected' class='die-span lower-span'><img class='die-face' src= {{die.face}}> </span>
         </div>
       </div>
     </div>
@@ -97,3 +96,4 @@
 
 
 </div>
+

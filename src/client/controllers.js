@@ -6,6 +6,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
   var numToRoll = 5;
   var heldDice = [];
   var bonus;
+  var playerYahtzees = 0;
 
   $scope.upper = {};
   $scope.lower = {};
@@ -137,6 +138,9 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     combineArrays();
     if($scope.yahtzee === undefined && hand !== undefined){
       var yahtzee = RollServices.yahtzee(hand);
+      if(yahtzee !== 0){
+        playerYahtzees++;
+      }
       $scope.lower.yahtzee = yahtzee;
       $scope.lowerTotal += yahtzee;
       confirmScore();
@@ -210,25 +214,25 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
     numToRoll = 5;
     if(gameTurns >= 13){
       $scope.gameOver = true;
+      console.log($scope.showUser);
       if($scope.showUser !== undefined){
+        var sendData = {};
         var grandTotal = ($scope.upperTotal + $scope.lowerTotal);
-        var gamesPlayed = ($scope.showUser.gamesPlayed +=1);
+        var gamesPlayed = ($scope.showUser.gamesPlayed+= 1);
+        var points = ($scope.showUser.pointsScored + grandTotal);
         if(grandTotal > $scope.showUser.highScore){
-          LoginServices.update({gamesPlayed:gamesPlayed, highScore:grandTotal})
-          .then(function(data){
-            $rootScope.userid = data.user._id;
-            $rootScope.user = data.user;
-            $scope.showUser = data.user;
-          });
+          sendData.highScore = grandTotal;
         }
-        else{
-          LoginServices.update({gamesPlayed:gamesPlayed})
-          .then(function(data){
-            $rootScope.userid = data.user._id;
-            $rootScope.user = data.user;
-            $scope.showUser = data.user;
-          });
-        }
+        sendData.gamesPlayed = gamesPlayed;
+        sendData.pointsScored = points;
+        sendData.yahtzees = playerYahtzees;
+        console.log("data???", sendData);
+        LoginServices.update(sendData)
+        .then(function(data){
+          $rootScope.userid = data.user._id;
+          $rootScope.user = data.user;
+          $scope.showUser = data.user;
+        });
       }
     }
   }
@@ -304,6 +308,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
       function checkYahtzee(){
         var yaht = RollServices.yahtzee(hand);
         if(yaht === 50 && $scope.yahtzee !== ''){
+          playerYahtzees++;
           return 50;
         }
         else{

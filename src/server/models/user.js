@@ -6,7 +6,10 @@ var User = new Schema({
   username: {type: String, unique:true},
   password: String,
   highScore: {type: Number, default: 0},
-  gamesPlayed: {type: Number, default: 0}
+  gamesPlayed: {type: Number, default: 0},
+  pointsScored: {type: Number, default: 0},
+  yahtzees: {type: Number, default: 0}
+
 });
 
 User.plugin(passportLocalMongoose);

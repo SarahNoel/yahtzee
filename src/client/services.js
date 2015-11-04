@@ -13,7 +13,9 @@ return{ roll:roll,
       };
 
   function roll(numDice){
-    var diceFace = [0, '\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+    // var diceFace = [0, '\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+     var diceFace = [0, '/public/die1.png', '/public/die2.png', '/public/die3.png', '/public/die4.png', '/public/die5.png', '/public/die6.png'];
+
     var playerHand = [];
     var die = 0;
     for (var i = 0; i < numDice; i++) {
