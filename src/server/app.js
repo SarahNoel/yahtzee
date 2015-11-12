@@ -7,12 +7,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 var http = require('http').Server(app);
+var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var expressSession = require('express-session');
-
+var socket = require('../client/sockets.js');
 var User = mongoose.model('users');
 
 // *** routes *** //
@@ -25,15 +25,14 @@ var app = express();
 
 // Create an http server with Node's HTTP module.
 // Pass it the Express application, and listen on port 8080.
-var server = require('http').createServer(app).listen(8080);
+// var server = require('http').createServer(app).listen( process.env.PORT ||8080);
 
-// Instantiate Socket.IO hand have it listen on the Express/HTTP server
+var server = require('http').Server(app);
+
+
+// Hook Socket.io into Express
 var io = require('socket.io').listen(server);
 
-io.sockets.on('connection', function (socket) {
-    console.log('client connected');
-    // agx.initGame(io, socket);
-});
 
 // *** config file *** //
 var config = require('./_config');
@@ -71,6 +70,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 
 passport.deserializeUser(User.deserializeUser());
+
+// Socket.io Communication
+
+io.sockets.on('connection', socket);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

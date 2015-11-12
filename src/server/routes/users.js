@@ -7,6 +7,7 @@ var local = require('passport-local');
 
 //register user
 router.post('/register', function(req, res) {
+  console.log(req.body);
   User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
     if (err) {
       return res.status(500).json({err: err});
@@ -26,7 +27,6 @@ router.post('/register', function(req, res) {
 router.post('/login', function(req, res, next) {
    passport.authenticate('local', function(err, user, info) {
     if (err) {
-      conosle.log(err);
       return res.status(500).json({
         err: err
       });
@@ -54,6 +54,7 @@ router.post('/login', function(req, res, next) {
 //user logout
 router.get('/logout', function(req, res) {
   req.logout();
+  req.session.user = '';
   res.status(200).json({status: 'Logged out.'});
 });
 

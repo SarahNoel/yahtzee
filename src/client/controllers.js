@@ -8,6 +8,7 @@ app.controller('RollController', ['$scope', '$location', '$rootScope', 'RollServ
   var bonus;
   var playerYahtzees = 0;
 
+
   $scope.scoreObj = {};
   $scope.noScore = true;
   $scope.scoreObj.upperTotal = 0;
