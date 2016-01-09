@@ -12,7 +12,6 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var expressSession = require('express-session');
-var socket = require('../client/sockets.js');
 var User = mongoose.model('users');
 
 // *** routes *** //
@@ -28,11 +27,6 @@ var app = express();
 // var server = require('http').createServer(app).listen( process.env.PORT ||8080);
 
 var server = require('http').Server(app);
-
-
-// Hook Socket.io into Express
-var io = require('socket.io').listen(server);
-
 
 // *** config file *** //
 var config = require('./_config');
@@ -71,9 +65,7 @@ passport.serializeUser(User.serializeUser());
 
 passport.deserializeUser(User.deserializeUser());
 
-// Socket.io Communication
 
-io.sockets.on('connection', socket);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -89,3 +89,13 @@ function onListening() {
   debug('Listening on ' + bind);
   console.log('Listening on ' + bind);
 }
+
+
+var io = require('socket.io').listen(server);
+// var socket = require('....../client/sockets.js');
+
+// // Socket.io Communication
+
+io.sockets.on('connection', function(socket){
+  console.log('tester');
+});
